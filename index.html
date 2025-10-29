@@ -80,8 +80,8 @@
 
         .scroll-container {
             position: relative;
-            width: 300px; /* УВЕЛИЧИЛ с 200px */
-            height: 220px; /* УВЕЛИЧИЛ с 150px */
+            width: 300px;
+            height: 220px;
             margin: 20px 0;
         }
 
@@ -94,8 +94,8 @@
 
         .wand-container {
             position: relative;
-            width: 120px; /* УВЕЛИЧИЛ с 80px */
-            height: 180px; /* УВЕЛИЧИЛ с 120px */
+            width: 120px;
+            height: 180px;
             cursor: pointer;
             margin-bottom: 20px;
         }
@@ -129,21 +129,26 @@
             display: none;
             flex-direction: column;
             align-items: center;
-            gap: 15px;
+            gap: 20px; /* УВЕЛИЧИЛ расстояние */
             z-index: 100;
-            background: rgba(0, 0, 0, 0.9);
-            padding: 20px;
-            border-radius: 15px;
-            max-width: 90%;
+            background: rgba(0, 0, 0, 0.7); /* СДЕЛАЛ полупрозрачным */
+            padding: 30px; /* УВЕЛИЧИЛ отступы */
+            border-radius: 20px; /* УВЕЛИЧИЛ скругление */
+            max-width: 95%;
+            min-width: 350px; /* УВЕЛИЧИЛ минимальную ширину */
+            backdrop-filter: blur(10px); /* Добавил размытие фона */
+            border: 2px solid rgba(255, 215, 0, 0.3); /* Добавил золотую рамку */
+            box-shadow: 0 0 50px rgba(255, 215, 0, 0.2); /* Добавил свечение */
         }
 
         .ticket {
-            width: 280px;
-            max-width: 90%;
+            width: 320px; /* УВЕЛИЧИЛ билет */
+            max-width: 95%;
             height: auto;
-            border-radius: 10px;
+            border-radius: 12px; /* УВЕЛИЧИЛ скругление */
             cursor: pointer;
             transition: transform 0.3s;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5); /* Добавил тень билету */
         }
 
         .ticket:active {
@@ -153,23 +158,23 @@
         .magic-text {
             font-family: cursive;
             color: #FFD700;
-            font-size: 1.3em;
-            margin: 10px 0;
-            text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+            font-size: 1.4em; /* УВЕЛИЧИЛ текст */
+            margin: 15px 0; /* УВЕЛИЧИЛ отступы */
+            text-shadow: 0 0 15px rgba(255, 215, 0, 0.7);
         }
 
         .final-message {
             font-family: cursive;
             color: #FFD700;
-            font-size: 1.4em;
-            margin-top: 10px;
-            text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+            font-size: 1.6em; /* УВЕЛИЧИЛ текст */
+            margin-top: 15px; /* УВЕЛИЧИЛ отступ */
+            text-shadow: 0 0 15px rgba(255, 215, 0, 0.7);
         }
 
         .click-hint {
             color: #FFD700;
-            font-size: 0.9em;
-            margin-top: 8px;
+            font-size: 1em; /* УВЕЛИЧИЛ текст */
+            margin-top: 10px; /* УВЕЛИЧИЛ отступ */
             animation: pulse 2s infinite;
         }
 
@@ -217,7 +222,7 @@
 
         .scroll-particle {
             position: absolute;
-            width: 6px; /* УВЕЛИЧИЛ частицы */
+            width: 6px;
             height: 6px;
             background: #FFD700;
             border-radius: 50%;
