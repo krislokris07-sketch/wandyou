@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Рождественское чудо</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Unicase:wght@400;600&family=Marck+Script&family=Neucha&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -13,7 +14,7 @@
         }
 
         body {
-            font-family: 'Georgia', serif;
+            font-family: 'Cormorant Unicase', 'Marck Script', 'Neucha', cursive;
             background: #000;
             color: #fff;
             overflow: hidden;
@@ -50,31 +51,44 @@
         }
 
         .story-text {
-            font-size: 1.3em;
-            line-height: 1.5;
-            margin-bottom: 20px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+            font-family: 'Cormorant Unicase', serif;
+            font-size: 1.4em;
+            line-height: 1.6;
+            margin-bottom: 25px;
+            text-shadow: 2px 2px 6px rgba(0,0,0,0.9);
             max-width: 90%;
-            background: rgba(0, 0, 0, 0.6);
-            padding: 15px;
-            border-radius: 10px;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 20px;
+            border-radius: 15px;
+            border: 1px solid rgba(255, 215, 0, 0.2);
+            font-weight: 400;
+            letter-spacing: 0.5px;
         }
 
         .btn-next {
-            padding: 15px 30px;
-            font-size: 1.1em;
-            background: linear-gradient(45deg, #5D4037, #8D6E63);
+            font-family: 'Marck Script', cursive;
+            padding: 18px 35px;
+            font-size: 1.4em;
+            background: linear-gradient(45deg, #8B4513, #A0522D);
             border: none;
-            border-radius: 25px;
-            color: white;
+            border-radius: 30px;
+            color: #FFEBB7;
             cursor: pointer;
-            transition: transform 0.3s, box-shadow 0.3s;
-            margin-top: 10px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+            transition: all 0.3s ease;
+            margin-top: 15px;
+            box-shadow: 0 6px 15px rgba(0,0,0,0.4);
+            border: 2px solid #D2691E;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+        }
+
+        .btn-next:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.5);
+            background: linear-gradient(45deg, #A0522D, #8B4513);
         }
 
         .btn-next:active {
-            transform: scale(0.95);
+            transform: translateY(0) scale(0.98);
         }
 
         .scroll-container {
@@ -231,30 +245,35 @@
         }
 
         .magic-text {
+            font-family: 'Marck Script', cursive;
             color: #FFD700;
-            font-size: 1.4em;
-            text-shadow: 0 0 10px #FFA000;
-            margin: 10px 0;
+            font-size: 1.8em;
+            text-shadow: 0 0 15px #FFA000, 0 0 30px rgba(255, 160, 0, 0.5);
+            margin: 15px 0;
+            letter-spacing: 1px;
         }
 
         .final-message {
+            font-family: 'Marck Script', cursive;
             color: #FFD700;
-            font-size: 1.6em;
-            text-shadow: 0 0 15px #FFA000;
-            margin-top: 15px;
+            font-size: 2em;
+            text-shadow: 0 0 20px #FFA000, 0 0 40px rgba(255, 160, 0, 0.6);
+            margin-top: 20px;
             font-style: italic;
         }
 
         .click-hint {
+            font-family: 'Neucha', cursive;
             color: #FFD700;
-            font-size: 1em;
-            margin-top: 10px;
+            font-size: 1.2em;
+            margin-top: 15px;
             animation: pulse 2s infinite;
+            text-shadow: 0 0 10px rgba(255, 215, 0, 0.8);
         }
 
         @keyframes pulse {
-            0%, 100% { opacity: 0.7; }
-            50% { opacity: 1; }
+            0%, 100% { opacity: 0.7; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.05); }
         }
 
         #scene3-content {
@@ -268,20 +287,22 @@
             bottom: 20px;
             right: 20px;
             background: rgba(0, 0, 0, 0.7);
-            border: none;
+            border: 2px solid rgba(255, 215, 0, 0.5);
             border-radius: 50%;
             width: 50px;
             height: 50px;
-            color: white;
+            color: #FFD700;
             cursor: pointer;
-            font-size: 1.2em;
+            font-size: 1.4em;
             z-index: 1000;
             transition: all 0.3s ease;
+            font-family: 'Marck Script', cursive;
         }
 
         .music-control:hover {
             background: rgba(0, 0, 0, 0.9);
             transform: scale(1.1);
+            border-color: rgba(255, 215, 0, 0.8);
         }
     </style>
 </head>
@@ -454,7 +475,7 @@
 
         function openTicket() {
             // Замени 'ticket.pdf' на путь к твоему PDF файлу
-            window.open('concert.pdf', '_blank');
+            window.open('ticket.pdf', '_blank');
         }
 
         function createParticles() {
