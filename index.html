@@ -262,6 +262,27 @@
             flex-direction: column;
             align-items: center;
         }
+
+        .music-control {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: rgba(0, 0, 0, 0.7);
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            color: white;
+            cursor: pointer;
+            font-size: 1.2em;
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        .music-control:hover {
+            background: rgba(0, 0, 0, 0.9);
+            transform: scale(1.1);
+        }
     </style>
 </head>
 <body>
@@ -333,11 +354,19 @@
         </div>
     </div>
 
+    <!-- Кнопка управления музыкой -->
+    <button class="music-control" id="musicToggle" onclick="toggleMusic()">🎵</button>
+
+    <!-- Аудио -->
     <audio id="magicSound" src="magic-sound.mp3" preload="auto"></audio>
+    <audio id="backgroundMusic" src="background-music.mp3" loop preload="auto"></audio>
 
     <script>
         let currentScene = 1;
         let magicDone = false;
+        let musicPlaying = false;
+        const backgroundMusic = document.getElementById('backgroundMusic');
+        backgroundMusic.volume = 0.3; // Устанавливаем комфортную громкость
 
         function nextScene(sceneNum) {
             const currentSceneElem = document.getElementById('scene' + currentScene);
@@ -348,6 +377,48 @@
             nextSceneElem.classList.add('scene-transition');
             
             currentScene = sceneNum;
+
+            // Автозапуск музыки при переходе на первую сцену
+            if (sceneNum === 1 && !musicPlaying) {
+                startBackgroundMusic();
+            }
+        }
+
+        function toggleMusic() {
+            if (musicPlaying) {
+                stopBackgroundMusic();
+            } else {
+                startBackgroundMusic();
+            }
+        }
+
+        function startBackgroundMusic() {
+            backgroundMusic.play().then(() => {
+                musicPlaying = true;
+                document.getElementById('musicToggle').textContent = '🔊';
+            }).catch(e => {
+                console.log('Автозапуск музыки заблокирован');
+            });
+        }
+
+        function stopBackgroundMusic() {
+            backgroundMusic.pause();
+            musicPlaying = false;
+            document.getElementById('musicToggle').textContent = '🎵';
+        }
+
+        function fadeOutMusic() {
+            const fadeOutInterval = setInterval(() => {
+                if (backgroundMusic.volume > 0.1) {
+                    backgroundMusic.volume -= 0.1;
+                } else {
+                    backgroundMusic.volume = 0;
+                    clearInterval(fadeOutInterval);
+                    backgroundMusic.pause();
+                    musicPlaying = false;
+                    document.getElementById('musicToggle').textContent = '🎵';
+                }
+            }, 100);
         }
 
         function doMagic() {
@@ -361,6 +432,11 @@
             wand.style.pointerEvents = 'none';
             
             wand.classList.add('magic');
+            
+            // Плавно заглушаем фоновую музыку
+            if (musicPlaying) {
+                fadeOutMusic();
+            }
             
             sound.play().catch(e => console.log('Автозапуск звука заблокирован'));
             
@@ -446,7 +522,7 @@
             }, 1600);
         }
 
-        // Проверка загрузки изображений
+        // Автозапуск музыки при загрузке страницы
         window.addEventListener('load', function() {
             console.log('Страница загружена, проверяем изображения...');
             
@@ -468,6 +544,11 @@
                 };
                 img.src = src;
             });
+
+            // Пытаемся запустить музыку автоматически
+            setTimeout(() => {
+                startBackgroundMusic();
+            }, 1000);
         });
 
         document.addEventListener('touchstart', function() {}, {passive: true});
