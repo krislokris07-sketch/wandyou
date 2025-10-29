@@ -80,9 +80,9 @@
 
         .scroll-container {
             position: relative;
-            width: 200px;
-            height: 150px;
-            margin: 15px 0;
+            width: 300px; /* УВЕЛИЧИЛ с 200px */
+            height: 220px; /* УВЕЛИЧИЛ с 150px */
+            margin: 20px 0;
         }
 
         .scroll-frame {
@@ -94,10 +94,10 @@
 
         .wand-container {
             position: relative;
-            width: 80px;
-            height: 120px;
+            width: 120px; /* УВЕЛИЧИЛ с 80px */
+            height: 180px; /* УВЕЛИЧИЛ с 120px */
             cursor: pointer;
-            margin-bottom: 15px;
+            margin-bottom: 20px;
         }
 
         .wand {
@@ -108,7 +108,7 @@
         }
 
         .wand-container:hover .wand {
-            filter: drop-shadow(0 0 10px #FFD700);
+            filter: drop-shadow(0 0 15px #FFD700) drop-shadow(0 0 5px #FFA000);
         }
 
         .wand-container.magic .wand {
@@ -217,12 +217,13 @@
 
         .scroll-particle {
             position: absolute;
-            width: 4px;
-            height: 4px;
+            width: 6px; /* УВЕЛИЧИЛ частицы */
+            height: 6px;
             background: #FFD700;
             border-radius: 50%;
             pointer-events: none;
             animation: scrollParticle 1s ease-out forwards;
+            box-shadow: 0 0 8px #FFA000;
         }
     </style>
 </head>
@@ -374,19 +375,19 @@
             const centerX = rect.left + rect.width / 2;
             const centerY = rect.top + rect.height / 2;
             
-            for (let i = 0; i < 12; i++) {
+            for (let i = 0; i < 15; i++) {
                 const particle = document.createElement('div');
                 particle.className = 'scroll-particle';
                 
                 const angle = Math.random() * Math.PI * 2;
-                const distance = 40 + Math.random() * 80;
+                const distance = 60 + Math.random() * 100;
                 const tx = Math.cos(angle) * distance;
                 const ty = Math.sin(angle) * distance;
                 
                 particle.style.setProperty('--tx', `${tx}px`);
                 particle.style.setProperty('--ty', `${ty}px`);
-                particle.style.left = `${centerX - 2}px`;
-                particle.style.top = `${centerY - 2}px`;
+                particle.style.left = `${centerX - 3}px`;
+                particle.style.top = `${centerY - 3}px`;
                 
                 document.body.appendChild(particle);
                 setTimeout(() => {
