@@ -254,6 +254,7 @@
         let currentScene = 1;
         let magicDone = false;
         let musicPlaying = false;
+        let backgroundMusic = null;
 
         // Предзагрузка фонов
         function preloadBackgrounds() {
@@ -278,6 +279,56 @@
             currentScene = sceneNum;
         }
 
+        function playMagicSound() {
+            const sound = new Audio('magic-sound.mp3');
+            sound.volume = 0.7;
+            sound.play().catch(e => console.log('Звук палочки не воспроизведён'));
+        }
+
+        function startBackgroundMusic() {
+            if (!backgroundMusic) {
+                backgroundMusic = new Audio('background-music.mp3');
+                backgroundMusic.loop = true;
+                backgroundMusic.volume = 0.3;
+            }
+            backgroundMusic.play().then(() => {
+                musicPlaying = true;
+                document.getElementById('musicToggle').textContent = '🔊';
+            }).catch(e => {
+                console.log('Фоновая музыка заблокирована');
+            });
+        }
+
+        function stopBackgroundMusic() {
+            if (backgroundMusic) {
+                backgroundMusic.pause();
+                musicPlaying = false;
+                document.getElementById('musicToggle').textContent = '🎵';
+            }
+        }
+
+        function fadeOutMusic() {
+            if (!backgroundMusic || !musicPlaying) return;
+            
+            const fadeOutInterval = setInterval(() => {
+                if (backgroundMusic.volume > 0.05) {
+                    backgroundMusic.volume -= 0.05;
+                } else {
+                    backgroundMusic.volume = 0;
+                    clearInterval(fadeOutInterval);
+                    stopBackgroundMusic();
+                }
+            }, 50);
+        }
+
+        function toggleMusic() {
+            if (musicPlaying) {
+                stopBackgroundMusic();
+            } else {
+                startBackgroundMusic();
+            }
+        }
+
         function doMagic() {
             if (magicDone) return;
             magicDone = true;
@@ -287,6 +338,14 @@
             
             wand.style.pointerEvents = 'none';
             wand.classList.add('magic');
+            
+            // Звук палочки
+            playMagicSound();
+            
+            // Плавное затухание фоновой музыки
+            if (musicPlaying) {
+                fadeOutMusic();
+            }
             
             // Анимация свёртка
             const frames = [
@@ -314,15 +373,13 @@
             window.open('concert.pdf', '_blank');
         }
 
-        function toggleMusic() {
-            // Простая кнопка без функционала для экономии
-            const btn = document.getElementById('musicToggle');
-            btn.textContent = btn.textContent === '🎵' ? '🔊' : '🎵';
-        }
-
         // Запуск при загрузке
         window.addEventListener('load', function() {
             preloadBackgrounds();
+            // Автозапуск музыки с задержкой
+            setTimeout(() => {
+                startBackgroundMusic();
+            }, 1000);
         });
     </script>
 </body>
