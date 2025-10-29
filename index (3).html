@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Рождественское чудо</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            touch-action: manipulation;
+        }
+
+        body {
+            font-family: 'Georgia', serif;
+            background: #000;
+            color: #fff;
+            overflow: hidden;
+            width: 100vw;
+            height: 100vh;
+        }
+
+        .scene {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: none;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            text-align: center;
+        }
+
+        #scene1 {
+            display: flex;
+            background: url('scene1-bg.png') center/cover no-repeat;
+        }
+
+        #scene2 {
+            background: url('scene2-bg.png') center/cover no-repeat;
+        }
+
+        #scene3 {
+            background: url('scene3-bg.png') center/cover no-repeat;
+        }
+
+        .story-text {
+            font-size: 1.3em;
+            line-height: 1.5;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+            max-width: 90%;
+            background: rgba(0, 0, 0, 0.6);
+            padding: 15px;
+            border-radius: 10px;
+        }
+
+        .btn-next {
+            padding: 15px 30px;
+            font-size: 1.1em;
+            background: linear-gradient(45deg, #5D4037, #8D6E63);
+            border: none;
+            border-radius: 25px;
+            color: white;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+            margin-top: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+        }
+
+        .btn-next:active {
+            transform: scale(0.95);
+        }
+
+        .scroll-container {
+            position: relative;
+            width: 200px;
+            height: 150px;
+            margin: 20px 0;
+        }
+
+        .scroll-frame {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 0.4s ease-in-out;
+        }
+
+        .scroll-frame.active {
+            opacity: 1;
+        }
+
+        .wand-container {
+            position: relative;
+            width: 80px;
+            height: 120px;
+            cursor: pointer;
+            transition: transform 0.2s;
+            margin-bottom: 20px;
+        }
+
+        .wand {
+            width: 100%;
+            height: 100%;
+            transition: filter 0.3s;
+        }
+
+        .wand-container:hover .wand {
+            filter: drop-shadow(0 0 15px #FFD700) drop-shadow(0 0 5px #FFA000);
+        }
+
+        .wand-container.magic .wand {
+            animation: wandSwing 0.6s ease-in-out;
+        }
+
+        @keyframes wandSwing {
+            0%, 100% { transform: rotate(0deg) scale(1); }
+            25% { transform: rotate(-25deg) scale(1.1); }
+            50% { transform: rotate(5deg) scale(1.05); }
+            75% { transform: rotate(15deg) scale(1.1); }
+        }
+
+        .particles {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            pointer-events: none;
+            z-index: 10;
+        }
+
+        .particle {
+            position: absolute;
+            width: 6px;
+            height: 6px;
+            background: radial-gradient(circle, #FFD700, #FFA000);
+            border-radius: 50%;
+            animation: particleFloat 1.2s ease-out forwards;
+            box-shadow: 0 0 8px #FFD700;
+        }
+
+        @keyframes particleFloat {
+            0% {
+                opacity: 1;
+                transform: translate(0, 0) scale(1);
+            }
+            100% {
+                opacity: 0;
+                transform: translate(var(--tx), var(--ty)) scale(0);
+            }
+        }
+
+        .tickets {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+            z-index: 100;
+            background: rgba(0, 0, 0, 0.8);
+            padding: 25px;
+            border-radius: 15px;
+            max-width: 90%;
+        }
+
+        .ticket {
+            width: 300px;
+            max-width: 100%;
+            height: auto;
+            animation: ticketAppear 1s ease-out;
+            border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(255, 215, 0, 0.4);
+        }
+
+        @keyframes ticketAppear {
+            0% {
+                opacity: 0;
+                transform: translateY(40px) scale(0.7);
+            }
+            70% {
+                transform: translateY(-5px) scale(1.02);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        .fade-in {
+            animation: fadeIn 1.5s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .scene-transition {
+            animation: sceneTransition 1s ease-in-out;
+        }
+
+        @keyframes sceneTransition {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .magic-text {
+            color: #FFD700;
+            font-size: 1.4em;
+            text-shadow: 0 0 10px #FFA000;
+            margin: 10px 0;
+        }
+
+        .final-message {
+            color: #FFD700;
+            font-size: 1.6em;
+            text-shadow: 0 0 15px #FFA000;
+            margin-top: 15px;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+    <!-- Сцена 1: Вступление -->
+    <div id="scene1" class="scene fade-in">
+        <div class="story-text">
+            Ты забрел в забытую башню древних магов. Воздух гудит от древних заклинаний, 
+            а сердце выпрыгивает из груди от предчувствия чуда...
+        </div>
+        <div class="story-text">
+            Внезапно с верхнего яруса доносится шум падающего предмета. 
+            Деревянный звук отзывается эхом в каменных стенах.
+        </div>
+        <div class="story-text">
+            Что это могло быть? Рискнёшь посмотреть?
+        </div>
+        <button class="btn-next" onclick="nextScene(2)">Подняться по лестнице</button>
+    </div>
+
+    <!-- Сцена 2: Лестница -->
+    <div id="scene2" class="scene">
+        <div class="story-text">
+            Ты поднимаешься по витой каменной лестнице. Каждая ступенька скрипит под ногой, 
+            словно предупреждая о чём-то важном...
+        </div>
+        <div class="story-text">
+            На площадке ты видишь её - изящную волшебную палочку, 
+            лежащую на полу в луче лунного света.
+        </div>
+        <!-- Автоматический переход через 5 секунд -->
+    </div>
+
+    <!-- Сцена 3: Волшебство -->
+    <div id="scene3" class="scene">
+        <div class="story-text">
+            Палочка будто ждёт тебя. Рядом - старинный свёрток с таинственными символами.
+        </div>
+        <div class="magic-text">
+            Возьми палочку и произнеси заклинание...
+        </div>
+        
+        <div class="scroll-container">
+            <img src="scroll-frame-1.png" class="scroll-frame active" id="frame1">
+            <img src="scroll-frame-2.png" class="scroll-frame" id="frame2">
+            <img src="scroll-frame-3.png" class="scroll-frame" id="frame3">
+            <img src="scroll-frame-4.png" class="scroll-frame" id="frame4">
+        </div>
+        
+        <div class="wand-container" onclick="doMagic()">
+            <img src="wand.png" class="wand" id="wand">
+        </div>
+
+        <div class="tickets" id="tickets">
+            <div class="magic-text">
+                Магия раскрыла тайну! Этот билет ждал своего часа...
+            </div>
+            <img src="ticket1.png" class="ticket" id="single-ticket">
+            <div class="final-message">
+                Составишь мне компанию? 💫
+            </div>
+        </div>
+    </div>
+
+    <audio id="magicSound" src="magic-sound.mp3" preload="auto"></audio>
+
+    <script>
+        let currentScene = 1;
+        let magicDone = false;
+
+        function nextScene(sceneNum) {
+            const currentSceneElem = document.getElementById('scene' + currentScene);
+            const nextSceneElem = document.getElementById('scene' + sceneNum);
+            
+            currentSceneElem.style.display = 'none';
+            nextSceneElem.style.display = 'flex';
+            nextSceneElem.classList.add('scene-transition');
+            
+            currentScene = sceneNum;
+
+            if (sceneNum === 2) {
+                setTimeout(() => nextScene(3), 5000);
+            }
+        }
+
+        function doMagic() {
+            if (magicDone) return;
+            magicDone = true;
+            
+            const wand = document.querySelector('.wand-container');
+            const sound = document.getElementById('magicSound');
+            
+            wand.style.pointerEvents = 'none';
+            
+            wand.classList.add('magic');
+            
+            sound.play().catch(e => console.log('Автозапуск звука заблокирован'));
+            
+            createParticles();
+            
+            animateScroll();
+            
+            setTimeout(() => {
+                document.getElementById('tickets').style.display = 'flex';
+            }, 2000);
+        }
+
+        function createParticles() {
+            const container = document.querySelector('.wand-container');
+            const rect = container.getBoundingClientRect();
+            const centerX = rect.left + rect.width / 2;
+            const centerY = rect.top + rect.height / 2;
+            
+            for (let i = 0; i < 20; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                
+                const angle = Math.random() * Math.PI * 2;
+                const distance = 60 + Math.random() * 120;
+                const tx = Math.cos(angle) * distance;
+                const ty = Math.sin(angle) * distance;
+                
+                particle.style.setProperty('--tx', `${tx}px`);
+                particle.style.setProperty('--ty', `${ty}px`);
+                particle.style.left = `${centerX - 3}px`;
+                particle.style.top = `${centerY - 3}px`;
+                
+                particle.style.animationDelay = `${Math.random() * 0.3}s`;
+                
+                const particles = document.createElement('div');
+                particles.className = 'particles';
+                particles.appendChild(particle);
+                document.body.appendChild(particles);
+                
+                setTimeout(() => {
+                    if (particles.parentNode) {
+                        particles.parentNode.removeChild(particles);
+                    }
+                }, 1200);
+            }
+        }
+
+        function animateScroll() {
+            const frames = [
+                document.getElementById('frame1'),
+                document.getElementById('frame2'), 
+                document.getElementById('frame3'),
+                document.getElementById('frame4')
+            ];
+            
+            frames[0].classList.add('active');
+            
+            setTimeout(() => {
+                frames[0].classList.remove('active');
+                frames[1].classList.add('active');
+            }, 400);
+            
+            setTimeout(() => {
+                frames[1].classList.remove('active');
+                frames[2].classList.add('active');
+            }, 800);
+            
+            setTimeout(() => {
+                frames[2].classList.remove('active');
+                frames[3].classList.add('active');
+            }, 1200);
+            
+            setTimeout(() => {
+                frames[3].classList.remove('active');
+            }, 1600);
+        }
+
+        window.addEventListener('load', () => {
+            const images = [
+                'scene1-bg.png', 'scene2-bg.png', 'scene3-bg.png',
+                'wand.png', 'wand-glowing.png',
+                'scroll-frame-1.png', 'scroll-frame-2.png',
+                'scroll-frame-3.png', 'scroll-frame-4.png',
+                'ticket1.png'
+            ];
+            
+            images.forEach(src => {
+                const img = new Image();
+                img.src = src;
+            });
+        });
+
+        document.addEventListener('touchstart', function() {}, {passive: true});
+    </script>
+</body>
+</html>
