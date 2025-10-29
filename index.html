@@ -160,38 +160,38 @@
         }
 
         .tickets {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    display: none;
-    flex-direction: column;
-    align-items: center;
-    gap: 25px;
-    z-index: 100;
-    background: rgba(0, 0, 0, 0.9);
-    padding: 30px;
-    border-radius: 20px;
-    max-width: 95%;
-    min-width: 320px;
-    box-shadow: 0 0 40px rgba(255, 215, 0, 0.3);
-    border: 2px solid rgba(255, 215, 0, 0.2);
-}
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            gap: 25px;
+            z-index: 100;
+            background: rgba(0, 0, 0, 0.9);
+            padding: 30px;
+            border-radius: 20px;
+            max-width: 95%;
+            min-width: 320px;
+            box-shadow: 0 0 40px rgba(255, 215, 0, 0.3);
+            border: 2px solid rgba(255, 215, 0, 0.2);
+        }
 
-.ticket {
-    width: 350px;
-    max-width: 95%;
-    height: auto;
-    animation: ticketAppear 1s ease-out;
-    border-radius: 15px;
-    box-shadow: 0 15px 35px rgba(255, 215, 0, 0.5);
-    cursor: pointer;
-    transition: all 0.3s ease;
-}
+        .ticket {
+            width: 350px;
+            max-width: 95%;
+            height: auto;
+            animation: ticketAppear 1s ease-out;
+            border-radius: 15px;
+            box-shadow: 0 15px 35px rgba(255, 215, 0, 0.5);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
 
         .ticket:hover {
             transform: scale(1.05);
-            box-shadow: 0 15px 35px rgba(255, 215, 0, 0.6);
+            box-shadow: 0 20px 45px rgba(255, 215, 0, 0.7);
         }
 
         .ticket:active {
@@ -256,6 +256,12 @@
             0%, 100% { opacity: 0.7; }
             50% { opacity: 1; }
         }
+
+        #scene3-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
     </style>
 </head>
 <body>
@@ -293,22 +299,26 @@
     <!-- Сцена 3: Волшебство -->
     <div id="scene3" class="scene">
         <img src="scene3-bg.png" class="background-img" alt="Фон комнаты">
-        <div class="story-text">
-            Палочка будто ждёт тебя. Рядом - старинный свёрток с таинственными символами.
-        </div>
-        <div class="magic-text">
-            Возьми палочку и произнеси заклинание...
-        </div>
         
-        <div class="scroll-container">
-            <img src="scroll-frame-1.png" class="scroll-frame active" id="frame1">
-            <img src="scroll-frame-2.png" class="scroll-frame" id="frame2">
-            <img src="scroll-frame-3.png" class="scroll-frame" id="frame3">
-            <img src="scroll-frame-4.png" class="scroll-frame" id="frame4">
-        </div>
-        
-        <div class="wand-container" onclick="doMagic()">
-            <img src="wand.png" class="wand" id="wand">
+        <!-- Контейнер для текста, который будет скрываться -->
+        <div id="scene3-content">
+            <div class="story-text">
+                Палочка будто ждёт тебя. Рядом - старинный свёрток с таинственными символами.
+            </div>
+            <div class="magic-text">
+                Возьми палочку и произнеси заклинание...
+            </div>
+            
+            <div class="scroll-container">
+                <img src="scroll-frame-1.png" class="scroll-frame active" id="frame1">
+                <img src="scroll-frame-2.png" class="scroll-frame" id="frame2">
+                <img src="scroll-frame-3.png" class="scroll-frame" id="frame3">
+                <img src="scroll-frame-4.png" class="scroll-frame" id="frame4">
+            </div>
+            
+            <div class="wand-container" onclick="doMagic()">
+                <img src="wand.png" class="wand" id="wand">
+            </div>
         </div>
 
         <div class="tickets" id="tickets">
@@ -346,6 +356,7 @@
             
             const wand = document.querySelector('.wand-container');
             const sound = document.getElementById('magicSound');
+            const sceneContent = document.getElementById('scene3-content');
             
             wand.style.pointerEvents = 'none';
             
@@ -358,6 +369,9 @@
             animateScroll();
             
             setTimeout(() => {
+                // Скрываем старый контент
+                sceneContent.style.display = 'none';
+                // Показываем билет
                 document.getElementById('tickets').style.display = 'flex';
             }, 2000);
         }
