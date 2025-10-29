@@ -4,18 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Рождественское чудо</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Unicase:wght@400;600&family=Marck+Script&display=swap" rel="stylesheet">
     <style>
-        /* Локальные шрифты вместо Google Fonts */
-        @font-face {
-            font-family: 'MagicFont';
-            src: local('Georgia'), local('Times New Roman');
-        }
-        
-        @font-face {
-            font-family: 'ScriptFont';
-            src: local('Comic Sans MS'), local('Arial');
-        }
-
         * {
             margin: 0;
             padding: 0;
@@ -24,7 +14,7 @@
         }
 
         body {
-            font-family: 'MagicFont', serif;
+            font-family: 'Cormorant Unicase', serif;
             background: #000;
             color: #fff;
             overflow: hidden;
@@ -61,40 +51,51 @@
         }
 
         .story-text {
-            font-family: 'MagicFont', serif;
-            font-size: 1.3em;
-            line-height: 1.5;
-            margin-bottom: 20px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+            font-family: 'Cormorant Unicase', serif;
+            font-size: 1.4em;
+            line-height: 1.6;
+            margin-bottom: 25px;
+            text-shadow: 2px 2px 6px rgba(0,0,0,0.9);
             max-width: 90%;
-            background: rgba(0, 0, 0, 0.6);
-            padding: 15px;
-            border-radius: 10px;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 20px;
+            border-radius: 15px;
+            border: 1px solid rgba(255, 215, 0, 0.2);
+            font-weight: 400;
+            letter-spacing: 0.5px;
         }
 
         .btn-next {
-            font-family: 'ScriptFont', cursive;
-            padding: 15px 30px;
-            font-size: 1.2em;
-            background: linear-gradient(45deg, #5D4037, #8D6E63);
+            font-family: 'Marck Script', cursive;
+            padding: 18px 35px;
+            font-size: 1.4em;
+            background: linear-gradient(45deg, #8B4513, #A0522D);
             border: none;
-            border-radius: 25px;
-            color: white;
+            border-radius: 30px;
+            color: #FFEBB7;
             cursor: pointer;
-            transition: transform 0.3s, box-shadow 0.3s;
-            margin-top: 10px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+            transition: all 0.3s ease;
+            margin-top: 15px;
+            box-shadow: 0 6px 15px rgba(0,0,0,0.4);
+            border: 2px solid #D2691E;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+        }
+
+        .btn-next:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.5);
+            background: linear-gradient(45deg, #A0522D, #8B4513);
         }
 
         .btn-next:active {
-            transform: scale(0.95);
+            transform: translateY(0) scale(0.98);
         }
 
         .scroll-container {
             position: relative;
-            width: 200px;
-            height: 160px;
-            margin: 15px 0;
+            width: 250px;
+            height: 200px;
+            margin: 20px 0;
         }
 
         .scroll-frame {
@@ -114,11 +115,11 @@
 
         .wand-container {
             position: relative;
-            width: 80px;
-            height: 120px;
+            width: 100px;
+            height: 150px;
             cursor: pointer;
             transition: transform 0.2s;
-            margin-bottom: 15px;
+            margin-bottom: 20px;
         }
 
         .wand {
@@ -129,7 +130,7 @@
         }
 
         .wand-container:hover .wand {
-            filter: drop-shadow(0 0 10px #FFD700);
+            filter: drop-shadow(0 0 15px #FFD700) drop-shadow(0 0 5px #FFA000);
         }
 
         .wand-container.magic .wand {
@@ -138,8 +139,9 @@
 
         @keyframes wandSwing {
             0%, 100% { transform: rotate(0deg) scale(1); }
-            25% { transform: rotate(-20deg) scale(1.1); }
-            75% { transform: rotate(10deg) scale(1.1); }
+            25% { transform: rotate(-25deg) scale(1.1); }
+            50% { transform: rotate(5deg) scale(1.05); }
+            75% { transform: rotate(15deg) scale(1.1); }
         }
 
         .particles {
@@ -152,11 +154,12 @@
 
         .particle {
             position: absolute;
-            width: 4px;
-            height: 4px;
-            background: #FFD700;
+            width: 6px;
+            height: 6px;
+            background: radial-gradient(circle, #FFD700, #FFA000);
             border-radius: 50%;
-            animation: particleFloat 1s ease-out forwards;
+            animation: particleFloat 1.2s ease-out forwards;
+            box-shadow: 0 0 8px #FFD700;
         }
 
         @keyframes particleFloat {
@@ -178,23 +181,31 @@
             display: none;
             flex-direction: column;
             align-items: center;
-            gap: 15px;
+            gap: 25px;
             z-index: 100;
             background: rgba(0, 0, 0, 0.9);
-            padding: 20px;
-            border-radius: 15px;
-            max-width: 90%;
+            padding: 30px;
+            border-radius: 20px;
+            max-width: 95%;
+            min-width: 320px;
+            box-shadow: 0 0 40px rgba(255, 215, 0, 0.3);
+            border: 2px solid rgba(255, 215, 0, 0.2);
         }
 
         .ticket {
-            width: 280px;
-            max-width: 90%;
+            width: 350px;
+            max-width: 95%;
             height: auto;
-            animation: ticketAppear 0.8s ease-out;
-            border-radius: 10px;
-            box-shadow: 0 8px 20px rgba(255, 215, 0, 0.4);
+            animation: ticketAppear 1s ease-out;
+            border-radius: 15px;
+            box-shadow: 0 15px 35px rgba(255, 215, 0, 0.5);
             cursor: pointer;
             transition: all 0.3s ease;
+        }
+
+        .ticket:hover {
+            transform: scale(1.05);
+            box-shadow: 0 20px 45px rgba(255, 215, 0, 0.7);
         }
 
         .ticket:active {
@@ -204,7 +215,10 @@
         @keyframes ticketAppear {
             0% {
                 opacity: 0;
-                transform: translateY(30px) scale(0.8);
+                transform: translateY(40px) scale(0.7);
+            }
+            70% {
+                transform: translateY(-5px) scale(1.02);
             }
             100% {
                 opacity: 1;
@@ -213,7 +227,7 @@
         }
 
         .fade-in {
-            animation: fadeIn 1s ease-in;
+            animation: fadeIn 1.5s ease-in;
         }
 
         @keyframes fadeIn {
@@ -221,33 +235,45 @@
             to { opacity: 1; }
         }
 
+        .scene-transition {
+            animation: sceneTransition 1s ease-in-out;
+        }
+
+        @keyframes sceneTransition {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
         .magic-text {
-            font-family: 'ScriptFont', cursive;
+            font-family: 'Marck Script', cursive;
             color: #FFD700;
-            font-size: 1.3em;
-            text-shadow: 0 0 8px #FFA000;
-            margin: 8px 0;
+            font-size: 1.8em;
+            text-shadow: 0 0 15px #FFA000, 0 0 30px rgba(255, 160, 0, 0.5);
+            margin: 15px 0;
+            letter-spacing: 1px;
         }
 
         .final-message {
-            font-family: 'ScriptFont', cursive;
+            font-family: 'Marck Script', cursive;
             color: #FFD700;
-            font-size: 1.4em;
-            text-shadow: 0 0 10px #FFA000;
-            margin-top: 10px;
+            font-size: 2em;
+            text-shadow: 0 0 20px #FFA000, 0 0 40px rgba(255, 160, 0, 0.6);
+            margin-top: 20px;
+            font-style: italic;
         }
 
         .click-hint {
-            font-family: 'MagicFont', serif;
+            font-family: 'Cormorant Unicase', serif;
             color: #FFD700;
-            font-size: 0.9em;
-            margin-top: 8px;
+            font-size: 1.2em;
+            margin-top: 15px;
             animation: pulse 2s infinite;
+            text-shadow: 0 0 10px rgba(255, 215, 0, 0.8);
         }
 
         @keyframes pulse {
-            0%, 100% { opacity: 0.7; }
-            50% { opacity: 1; }
+            0%, 100% { opacity: 0.7; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.05); }
         }
 
         #scene3-content {
@@ -258,17 +284,25 @@
 
         .music-control {
             position: fixed;
-            bottom: 15px;
-            right: 15px;
+            bottom: 20px;
+            right: 20px;
             background: rgba(0, 0, 0, 0.7);
-            border: none;
+            border: 2px solid rgba(255, 215, 0, 0.5);
             border-radius: 50%;
-            width: 40px;
-            height: 40px;
-            color: white;
+            width: 50px;
+            height: 50px;
+            color: #FFD700;
             cursor: pointer;
-            font-size: 1.1em;
+            font-size: 1.4em;
             z-index: 1000;
+            transition: all 0.3s ease;
+            font-family: 'Marck Script', cursive;
+        }
+
+        .music-control:hover {
+            background: rgba(0, 0, 0, 0.9);
+            transform: scale(1.1);
+            border-color: rgba(255, 215, 0, 0.8);
         }
     </style>
 </head>
@@ -277,10 +311,12 @@
     <div id="scene1" class="scene fade-in">
         <img src="scene1-bg.png" class="background-img" alt="Фон башни" loading="lazy">
         <div class="story-text">
-            Ты забрел в забытую башню древних магов. Воздух гудит от древних заклинаний...
+            Ты забрел в забытую башню древних магов. Воздух гудит от древних заклинаний, 
+            а сердце выпрыгивает из груди от предчувствия чуда...
         </div>
         <div class="story-text">
-            Внезапно с верхнего яруса доносится шум падающего предмета.
+            Внезапно с верхнего яруса доносится шум падающего предмета. 
+            Деревянный звук отзывается эхом в каменных стенах.
         </div>
         <div class="story-text">
             Что это могло быть? Рискнёшь посмотреть?
@@ -292,10 +328,12 @@
     <div id="scene2" class="scene">
         <img src="scene2-bg.png" class="background-img" alt="Фон лестницы" loading="lazy">
         <div class="story-text">
-            Ты поднимаешься по витой каменной лестнице...
+            Ты поднимаешься по витой каменной лестнице. Каждая ступенька скрипит под ногой, 
+            словно предупреждая о чём-то важном...
         </div>
         <div class="story-text">
-            На площадке ты видишь её - волшебную палочку.
+            На площадке ты видишь её - изящную волшебную палочку, 
+            лежащую на полу в луче лунного света.
         </div>
         <button class="btn-next" onclick="nextScene(3)">Взять палочку</button>
     </div>
@@ -304,9 +342,10 @@
     <div id="scene3" class="scene">
         <img src="scene3-bg.png" class="background-img" alt="Фон комнаты" loading="lazy">
         
+        <!-- Контейнер для текста, который будет скрываться -->
         <div id="scene3-content">
             <div class="story-text">
-                Палочка будто ждёт тебя. Рядом - старинный свёрток.
+                Палочка будто ждёт тебя. Рядом - старинный свёрток с таинственными символами.
             </div>
             <div class="magic-text">
                 Возьми палочку и произнеси заклинание...
@@ -326,18 +365,20 @@
 
         <div class="tickets" id="tickets">
             <div class="magic-text">
-                Магия раскрыла тайну!
+                Магия раскрыла тайну! Этот билет ждал своего часа...
             </div>
             <img src="ticket1.png" class="ticket" id="single-ticket" onclick="openTicket()" loading="lazy">
-            <div class="click-hint">Нажми на билет</div>
+            <div class="click-hint">Нажми на билет, чтобы открыть</div>
             <div class="final-message">
                 Составишь мне компанию? 💫
             </div>
         </div>
     </div>
 
+    <!-- Кнопка управления музыкой -->
     <button class="music-control" id="musicToggle" onclick="toggleMusic()">🎵</button>
 
+    <!-- Аудио -->
     <audio id="magicSound" src="magic-sound.mp3" preload="none"></audio>
     <audio id="backgroundMusic" src="background-music.mp3" loop preload="none"></audio>
 
@@ -346,24 +387,59 @@
         let magicDone = false;
         let musicPlaying = false;
         const backgroundMusic = document.getElementById('backgroundMusic');
-        backgroundMusic.volume = 0.3;
+        backgroundMusic.volume = 0.3; // Устанавливаем комфортную громкость
 
         function nextScene(sceneNum) {
-            document.getElementById('scene' + currentScene).style.display = 'none';
-            document.getElementById('scene' + sceneNum).style.display = 'flex';
+            const currentSceneElem = document.getElementById('scene' + currentScene);
+            const nextSceneElem = document.getElementById('scene' + sceneNum);
+            
+            currentSceneElem.style.display = 'none';
+            nextSceneElem.style.display = 'flex';
+            nextSceneElem.classList.add('scene-transition');
+            
             currentScene = sceneNum;
+
+            // Автозапуск музыки при переходе на первую сцену
+            if (sceneNum === 1 && !musicPlaying) {
+                startBackgroundMusic();
+            }
         }
 
         function toggleMusic() {
             if (musicPlaying) {
-                backgroundMusic.pause();
-                musicPlaying = false;
-                document.getElementById('musicToggle').textContent = '🎵';
+                stopBackgroundMusic();
             } else {
-                backgroundMusic.play().catch(e => console.log('Музыка заблокирована'));
+                startBackgroundMusic();
+            }
+        }
+
+        function startBackgroundMusic() {
+            backgroundMusic.play().then(() => {
                 musicPlaying = true;
                 document.getElementById('musicToggle').textContent = '🔊';
-            }
+            }).catch(e => {
+                console.log('Автозапуск музыки заблокирован');
+            });
+        }
+
+        function stopBackgroundMusic() {
+            backgroundMusic.pause();
+            musicPlaying = false;
+            document.getElementById('musicToggle').textContent = '🎵';
+        }
+
+        function fadeOutMusic() {
+            const fadeOutInterval = setInterval(() => {
+                if (backgroundMusic.volume > 0.1) {
+                    backgroundMusic.volume -= 0.1;
+                } else {
+                    backgroundMusic.volume = 0;
+                    clearInterval(fadeOutInterval);
+                    backgroundMusic.pause();
+                    musicPlaying = false;
+                    document.getElementById('musicToggle').textContent = '🎵';
+                }
+            }, 100);
         }
 
         function doMagic() {
@@ -371,22 +447,30 @@
             magicDone = true;
             
             const wand = document.querySelector('.wand-container');
+            const sound = document.getElementById('magicSound');
             const sceneContent = document.getElementById('scene3-content');
             
             wand.style.pointerEvents = 'none';
+            
             wand.classList.add('magic');
             
-            // Загружаем и проигрываем звук только при клике
-            const sound = document.getElementById('magicSound');
-            sound.play().catch(e => console.log('Звук заблокирован'));
+            // Плавно заглушаем фоновую музыку
+            if (musicPlaying) {
+                fadeOutMusic();
+            }
+            
+            sound.play().catch(e => console.log('Автозапуск звука заблокирован'));
             
             createParticles();
+            
             animateScroll();
             
             setTimeout(() => {
+                // Скрываем старый контент
                 sceneContent.style.display = 'none';
+                // Показываем билет
                 document.getElementById('tickets').style.display = 'flex';
-            }, 1500);
+            }, 2000);
         }
 
         function openTicket() {
@@ -399,26 +483,32 @@
             const centerX = rect.left + rect.width / 2;
             const centerY = rect.top + rect.height / 2;
             
-            for (let i = 0; i < 12; i++) {
+            for (let i = 0; i < 20; i++) {
                 const particle = document.createElement('div');
                 particle.className = 'particle';
                 
                 const angle = Math.random() * Math.PI * 2;
-                const distance = 40 + Math.random() * 80;
+                const distance = 60 + Math.random() * 120;
                 const tx = Math.cos(angle) * distance;
                 const ty = Math.sin(angle) * distance;
                 
                 particle.style.setProperty('--tx', `${tx}px`);
                 particle.style.setProperty('--ty', `${ty}px`);
-                particle.style.left = `${centerX - 2}px`;
-                particle.style.top = `${centerY - 2}px`;
+                particle.style.left = `${centerX - 3}px`;
+                particle.style.top = `${centerY - 3}px`;
+                
+                particle.style.animationDelay = `${Math.random() * 0.3}s`;
                 
                 const particles = document.createElement('div');
                 particles.className = 'particles';
                 particles.appendChild(particle);
                 document.body.appendChild(particles);
                 
-                setTimeout(() => particles.remove(), 1000);
+                setTimeout(() => {
+                    if (particles.parentNode) {
+                        particles.parentNode.removeChild(particles);
+                    }
+                }, 1200);
             }
         }
 
@@ -430,22 +520,55 @@
                 document.getElementById('frame4')
             ];
             
-            setTimeout(() => frames[0].classList.remove('active'), 400);
-            setTimeout(() => frames[1].classList.add('active'), 400);
-            setTimeout(() => frames[1].classList.remove('active'), 800);
-            setTimeout(() => frames[2].classList.add('active'), 800);
-            setTimeout(() => frames[2].classList.remove('active'), 1200);
-            setTimeout(() => frames[3].classList.add('active'), 1200);
-            setTimeout(() => frames[3].classList.remove('active'), 1600);
+            frames[0].classList.add('active');
+            
+            setTimeout(() => {
+                frames[0].classList.remove('active');
+                frames[1].classList.add('active');
+            }, 400);
+            
+            setTimeout(() => {
+                frames[1].classList.remove('active');
+                frames[2].classList.add('active');
+            }, 800);
+            
+            setTimeout(() => {
+                frames[2].classList.remove('active');
+                frames[3].classList.add('active');
+            }, 1200);
+            
+            setTimeout(() => {
+                frames[3].classList.remove('active');
+            }, 1600);
         }
 
-        // Предзагрузка только следующих сцен
+        // Автозапуск музыки при загрузке страницы
         window.addEventListener('load', function() {
-            // Предзагружаем только сцену 2 при загрузке сцены 1
-            if (currentScene === 1) {
+            console.log('Страница загружена, проверяем изображения...');
+            
+            const images = [
+                'scene1-bg.png', 'scene2-bg.png', 'scene3-bg.png',
+                'wand.png',
+                'scroll-frame-1.png', 'scroll-frame-2.png',
+                'scroll-frame-3.png', 'scroll-frame-4.png',
+                'ticket1.png'
+            ];
+            
+            images.forEach(src => {
                 const img = new Image();
-                img.src = 'scene2-bg.png';
-            }
+                img.onload = function() {
+                    console.log('Загружено:', src);
+                };
+                img.onerror = function() {
+                    console.error('Ошибка загрузки:', src);
+                };
+                img.src = src;
+            });
+
+            // Пытаемся запустить музыку автоматически
+            setTimeout(() => {
+                startBackgroundMusic();
+            }, 1000);
         });
 
         document.addEventListener('touchstart', function() {}, {passive: true});
