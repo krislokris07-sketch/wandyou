@@ -80,9 +80,9 @@
 
         .scroll-container {
             position: relative;
-            width: 300px;
-            height: 220px;
-            margin: 20px 0;
+            width: 350px; /* УВЕЛИЧИЛ с 300px */
+            height: 260px; /* УВЕЛИЧИЛ с 220px */
+            margin: 25px 0; /* УВЕЛИЧИЛ отступ */
         }
 
         .scroll-frame {
@@ -94,10 +94,10 @@
 
         .wand-container {
             position: relative;
-            width: 120px;
-            height: 180px;
+            width: 140px; /* УВЕЛИЧИЛ с 120px */
+            height: 210px; /* УВЕЛИЧИЛ с 180px */
             cursor: pointer;
-            margin-bottom: 20px;
+            margin-bottom: 25px; /* УВЕЛИЧИЛ отступ */
         }
 
         .wand {
@@ -108,7 +108,7 @@
         }
 
         .wand-container:hover .wand {
-            filter: drop-shadow(0 0 15px #FFD700) drop-shadow(0 0 5px #FFA000);
+            filter: drop-shadow(0 0 20px #FFD700) drop-shadow(0 0 8px #FFA000); /* УВЕЛИЧИЛ свечение */
         }
 
         .wand-container.magic .wand {
@@ -129,26 +129,26 @@
             display: none;
             flex-direction: column;
             align-items: center;
-            gap: 20px; /* УВЕЛИЧИЛ расстояние */
+            gap: 20px;
             z-index: 100;
-            background: rgba(0, 0, 0, 0.7); /* СДЕЛАЛ полупрозрачным */
-            padding: 30px; /* УВЕЛИЧИЛ отступы */
-            border-radius: 20px; /* УВЕЛИЧИЛ скругление */
+            background: rgba(0, 0, 0, 0.7);
+            padding: 30px;
+            border-radius: 20px;
             max-width: 95%;
-            min-width: 350px; /* УВЕЛИЧИЛ минимальную ширину */
-            backdrop-filter: blur(10px); /* Добавил размытие фона */
-            border: 2px solid rgba(255, 215, 0, 0.3); /* Добавил золотую рамку */
-            box-shadow: 0 0 50px rgba(255, 215, 0, 0.2); /* Добавил свечение */
+            min-width: 350px;
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255, 215, 0, 0.3);
+            box-shadow: 0 0 50px rgba(255, 215, 0, 0.2);
         }
 
         .ticket {
-            width: 320px; /* УВЕЛИЧИЛ билет */
+            width: 320px;
             max-width: 95%;
             height: auto;
-            border-radius: 12px; /* УВЕЛИЧИЛ скругление */
+            border-radius: 12px;
             cursor: pointer;
             transition: transform 0.3s;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5); /* Добавил тень билету */
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
         }
 
         .ticket:active {
@@ -158,23 +158,23 @@
         .magic-text {
             font-family: cursive;
             color: #FFD700;
-            font-size: 1.4em; /* УВЕЛИЧИЛ текст */
-            margin: 15px 0; /* УВЕЛИЧИЛ отступы */
+            font-size: 1.4em;
+            margin: 15px 0;
             text-shadow: 0 0 15px rgba(255, 215, 0, 0.7);
         }
 
         .final-message {
             font-family: cursive;
             color: #FFD700;
-            font-size: 1.6em; /* УВЕЛИЧИЛ текст */
-            margin-top: 15px; /* УВЕЛИЧИЛ отступ */
+            font-size: 1.6em;
+            margin-top: 15px;
             text-shadow: 0 0 15px rgba(255, 215, 0, 0.7);
         }
 
         .click-hint {
             color: #FFD700;
-            font-size: 1em; /* УВЕЛИЧИЛ текст */
-            margin-top: 10px; /* УВЕЛИЧИЛ отступ */
+            font-size: 1em;
+            margin-top: 10px;
             animation: pulse 2s infinite;
         }
 
@@ -222,13 +222,13 @@
 
         .scroll-particle {
             position: absolute;
-            width: 6px;
-            height: 6px;
+            width: 8px; /* УВЕЛИЧИЛ частицы */
+            height: 8px;
             background: #FFD700;
             border-radius: 50%;
             pointer-events: none;
             animation: scrollParticle 1s ease-out forwards;
-            box-shadow: 0 0 8px #FFA000;
+            box-shadow: 0 0 12px #FFA000; /* УВЕЛИЧИЛ свечение частиц */
         }
     </style>
 </head>
@@ -385,14 +385,14 @@
                 particle.className = 'scroll-particle';
                 
                 const angle = Math.random() * Math.PI * 2;
-                const distance = 60 + Math.random() * 100;
+                const distance = 80 + Math.random() * 120; /* УВЕЛИЧИЛ расстояние разлёта */
                 const tx = Math.cos(angle) * distance;
                 const ty = Math.sin(angle) * distance;
                 
                 particle.style.setProperty('--tx', `${tx}px`);
                 particle.style.setProperty('--ty', `${ty}px`);
-                particle.style.left = `${centerX - 3}px`;
-                particle.style.top = `${centerY - 3}px`;
+                particle.style.left = `${centerX - 4}px`; /* УВЕЛИЧИЛ смещение */
+                particle.style.top = `${centerY - 4}px`;
                 
                 document.body.appendChild(particle);
                 setTimeout(() => {
