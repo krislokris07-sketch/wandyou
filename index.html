@@ -160,31 +160,34 @@
         }
 
         .tickets {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            display: none;
-            flex-direction: column;
-            align-items: center;
-            gap: 20px;
-            z-index: 100;
-            background: rgba(0, 0, 0, 0.8);
-            padding: 25px;
-            border-radius: 15px;
-            max-width: 90%;
-        }
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    gap: 25px;
+    z-index: 100;
+    background: rgba(0, 0, 0, 0.9);
+    padding: 30px;
+    border-radius: 20px;
+    max-width: 95%;
+    min-width: 320px;
+    box-shadow: 0 0 40px rgba(255, 215, 0, 0.3);
+    border: 2px solid rgba(255, 215, 0, 0.2);
+}
 
-        .ticket {
-            width: 300px;
-            max-width: 100%;
-            height: auto;
-            animation: ticketAppear 1s ease-out;
-            border-radius: 12px;
-            box-shadow: 0 10px 25px rgba(255, 215, 0, 0.4);
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
+.ticket {
+    width: 350px;
+    max-width: 95%;
+    height: auto;
+    animation: ticketAppear 1s ease-out;
+    border-radius: 15px;
+    box-shadow: 0 15px 35px rgba(255, 215, 0, 0.5);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
 
         .ticket:hover {
             transform: scale(1.05);
