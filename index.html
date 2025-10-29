@@ -182,6 +182,17 @@
             animation: ticketAppear 1s ease-out;
             border-radius: 12px;
             box-shadow: 0 10px 25px rgba(255, 215, 0, 0.4);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .ticket:hover {
+            transform: scale(1.05);
+            box-shadow: 0 15px 35px rgba(255, 215, 0, 0.6);
+        }
+
+        .ticket:active {
+            transform: scale(0.98);
         }
 
         @keyframes ticketAppear {
@@ -230,6 +241,18 @@
             margin-top: 15px;
             font-style: italic;
         }
+
+        .click-hint {
+            color: #FFD700;
+            font-size: 1em;
+            margin-top: 10px;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 0.7; }
+            50% { opacity: 1; }
+        }
     </style>
 </head>
 <body>
@@ -261,6 +284,7 @@
             На площадке ты видишь её - изящную волшебную палочку, 
             лежащую на полу в луче лунного света.
         </div>
+        <button class="btn-next" onclick="nextScene(3)">Взять палочку</button>
     </div>
 
     <!-- Сцена 3: Волшебство -->
@@ -288,7 +312,8 @@
             <div class="magic-text">
                 Магия раскрыла тайну! Этот билет ждал своего часа...
             </div>
-            <img src="ticket1.png" class="ticket" id="single-ticket">
+            <img src="ticket1.png" class="ticket" id="single-ticket" onclick="openTicket()">
+            <div class="click-hint">Нажми на билет, чтобы открыть</div>
             <div class="final-message">
                 Составишь мне компанию? 💫
             </div>
@@ -310,10 +335,6 @@
             nextSceneElem.classList.add('scene-transition');
             
             currentScene = sceneNum;
-
-            if (sceneNum === 2) {
-                setTimeout(() => nextScene(3), 5000);
-            }
         }
 
         function doMagic() {
@@ -336,6 +357,11 @@
             setTimeout(() => {
                 document.getElementById('tickets').style.display = 'flex';
             }, 2000);
+        }
+
+        function openTicket() {
+            // Замени 'ticket.pdf' на путь к твоему PDF файлу
+            window.open('ticket.pdf', '_blank');
         }
 
         function createParticles() {
